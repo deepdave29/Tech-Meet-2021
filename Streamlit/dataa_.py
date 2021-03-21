@@ -3,6 +3,7 @@ import pandas as pd
 import numpy as np 
 import matplotlib.pyplot as plt
 import cv2 as cv2 
+from PIL import Image
 
 #data=pd.read_csv("#name of CSV",width=,height=)'
 A=[1,2,3,4,5,6,7,8,9,10]
@@ -47,9 +48,8 @@ uploaded_files = sl.file_uploader("Choose images file", accept_multiple_files=Tr
 if len(uploaded_files)!=0:
     test_images = sl.slider('Kitne aadmi the', 0, len(uploaded_files)-1, 1)
 
-#sl.write(test_images)
 
-#sl.image(uploaded_files[test_images])
+#sl.image(uploaded_files[0])
 
 # for uploaded_file in uploaded_files:
 #     sl.image(uploaded_file)
@@ -60,24 +60,43 @@ if len(uploaded_files)!=0:
 
 #flip: 
 sl.write(uploaded_files)
-
 for uploaded_file in uploaded_files:
-    im = cv2.imread()
-    flip=cv2.flip(im,1)
-    plt.imshow(flip)
-    #rotation:
-    img = cv2.imread()
-    rows,cols, temp = img.shape
-
+    
+    image = Image.open(uploaded_file)
+    img_array = np.array(image)
+    #sl.write(img_array)
+    # img_array = img_array.astype(np.uint8)
+    # img_red, img_green, img_blue = img_array
+    # rgb = np.dstack([img_red, img_green, img_blue])
+    
+    rows,cols, temp = img_array.shape
     M = cv2.getRotationMatrix2D((cols/2,rows/2),45,1)
-    dst = cv2.warpAffine(img,M,(cols,rows))
-    plt.imshow(dst)
+    dst = cv2.warpAffine(img_array,M,(cols,rows))
+    sl.image(dst)
+    
 
-    #Translation:
 
-    img=cv2.imread()
-    rows,cols,temp = img.shape
 
-    M = np.float32([[1,0,0],[0,1,0]])
-    dst = cv2.warpAffine(img,M,(cols,rows))
-    plt.imshow(dst)
+
+
+
+# for uploaded_file in uploaded_files:
+#     im = cv2.imread(uploaded_file.name)
+#     flip=cv2.flip(im,1)
+#     plt.imshow(flip)
+#     #rotation:
+#     img = cv2.imread(uploaded_file.name)
+#     rows,cols, temp = img.shape
+
+#     M = cv2.getRotationMatrix2D((cols/2,rows/2),45,1)
+#     dst = cv2.warpAffine(img,M,(cols,rows))
+#     sl.image(dst)
+
+#     #Translation:
+
+#     img=cv2.imread(uploaded_file.name)
+#     rows,cols,temp = img.shape
+
+#     M = np.float32([[1,0,0],[0,1,0]])
+#     dst = cv2.warpAffine(img,M,(cols,rows))
+#     plt.imshow(dst)
