@@ -13,6 +13,36 @@ def rotation(img, degree):
     dst = cv2.warpAffine(img_array,M,(cols,rows))
     st.image(dst)
 
+def translation(img):
+    #translation function
+    #to be completed
+    image = Image.open(img)
+    img_array = np.array(image)    
+    rows,cols, temp = img_array.shape
+
+def blurring(img):
+    #blurring function
+    #to be completed
+    image = Image.open(img)
+    img_array = np.array(image)    
+    rows,cols, temp = img_array.shape
+
+def brightness(img):
+    #function to increase/decrease the brightness of the image
+    #to be completed
+    image = Image.open(img)
+    img_array = np.array(image)    
+    rows,cols, temp = img_array.shape
+
+
+def zoom(img):
+    #function to zoom in/out the image with limit.
+    #to be completed
+    image = Image.open(img)
+    img_array = np.array(image)    
+    rows,cols, temp = img_array.shape
+
+
 st.title('Inter IIT Tech Meet 2021')
 
 uploaded_files = st.file_uploader("Upload images", accept_multiple_files = True)
